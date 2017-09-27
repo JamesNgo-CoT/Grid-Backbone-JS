@@ -6,6 +6,6 @@
   ],
   "private": true,
   "dependencies": {
-    "core": "https://github.com/CityofToronto/corejs.git#4.0.1"
+    "core": "https://github.com/CityofToronto/corejs.git#develop"
   }
 }

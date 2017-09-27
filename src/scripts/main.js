@@ -3,7 +3,7 @@
 // Any resources from this project should be referenced using SRC_PATH preprocessor var
 // Ex: let myImage = '/*@echo SRC_PATH*//img/sample.jpg';
 
-$(function () {
+$(function() {
   //Core uses https://www.npmjs.com/package/gulp-preprocess to allow for preprocessing:
   // @if ENV='local' || ENV='dev'
   console.log('running on env: ', '/* @echo ENV*/');
@@ -24,7 +24,7 @@ $(function () {
   //Maybe use some corejs features
 
   //You should use CotModel, which extends Backbone.Model, to manage data models
-  let sampleDataObject = new CotModel({
+  window.sampleDataObject = new CotModel(CotModel.formatJSON({
     text_field_name: 'Sample text field value',
     checkbox_field_name: ['one'],
     radio_field_name: 'two',
@@ -32,8 +32,21 @@ $(function () {
     phone: '416-392-0000',
     url: 'http://www.som.com',
     email: 'jkl.jkl@jkl.jkl',
-    select_field_name: 'three'
-  });
+    select_field_name: 'three',
+    grid: [{
+      grid_fld_one: 'http://www.google.com/',
+      grid_fld_two: 'abc'
+    }, {
+      grid_fld_one: 'http://www.google.com/',
+      grid_fld_two: 'abc'
+    }, {
+      grid_fld_one: 'url',
+      grid_fld_two: 'def'
+    }],
+    grid2: []
+  }, ['grid']));
+
+  console.log(sampleDataObject.toJSON());
 
   //You should use CotForm to create forms. The DemoForm class is an example that
   //uses a custom subclass of CotView, which extends Backbone.view, to manage a CotForm instance
@@ -46,9 +59,10 @@ $(function () {
   if (window['cot_app']) {
     const app = new cot_app("Grid-Backbone-JS");
 
-    app.setBreadcrumb([
-      {"name": "Grid-Backbone-JS", "link": "#"}
-    ]);
+    app.setBreadcrumb([{
+      "name": "Grid-Backbone-JS",
+      "link": "#"
+    }]);
 
     app.render();
   }
